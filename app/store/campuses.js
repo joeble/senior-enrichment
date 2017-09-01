@@ -60,22 +60,22 @@ export default function campusesReducer (campuses = [], action) {
 
 // THUNK CREATORS
 export const fetchCampuses = () => dispatch => {
-  axios.get('api/campuses')
+  axios.get('/api/campuses')
     .then(res => dispatch(getCampuses(res.data)))
     .catch(err => console.error(err));
 };
 export const addCampus = (campus) => dispatch => {
-  axios.post('api/campuses', campus)
+  axios.post('/api/campuses', campus)
     .then(res => dispatch(postCampus(res.data)))
     .catch(err => console.error(err));
 };
 export const updateCampus = (id, campus) => dispatch => {
-  axios.get('api/campuses', campus)
+  axios.get('/api/campuses', campus)
     .then(res => dispatch(putCampus(res.data)))
     .catch(err => console.error(err));
 };
 export const destroyCampus = (id) => dispatch => {
   dispatch(deleteCampus(id));
-  axios.delete(`api/campuses/${id}`)
+  axios.delete(`/api/campuses/${id}`)
     .catch(err => console.error(err));
 };

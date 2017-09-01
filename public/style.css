@@ -1,0 +1,65 @@
+* {
+  background-color: black;
+  color: white;
+}
+
+.wrapper {
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: repeat(4, [col] 300px );
+  grid-template-rows: repeat(2, [row] auto);
+
+}
+
+.header {
+  grid-column: col 1 / span 2;
+  grid-row: row 1;
+}
+
+.campusList {
+  grid-column: col 2;
+  grid-row: row 3;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.campusLuna {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.campusTerra {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.NavLink {
+  color: greenyellow;
+}
+
+.planetLink {
+  color: pink;
+}
+
+.studentLink {
+  color: crimson;
+}
+
+.campusLink {
+  color: skyblue;
+}
+
+.myBoi {
+  color: violet;
+}
+
+.secretLink {
+  background-color: white;
+  color: lightgray;
+}
+
+.deleteMe {
+  background-color: yellow;
+  color: red;
+}

@@ -45,13 +45,13 @@ export default function studentsReducer (students = [], action) {
     // not sure about this
     case UPDATE_STUDENT_INFO:
       return students.map(student => {
-        return (student.id === action.student.id)
+        return (+student.id === +action.student.id)
         ? action.student
         : student
         });
 
     case DELETE_STUDENT:
-      return students.filter(student => student.id !== action.id);
+      return students.filter(student => student.id !== +action.id);
 
     default:
       return students;
@@ -60,22 +60,22 @@ export default function studentsReducer (students = [], action) {
 
 // THUNK CREATORS
 export const fetchStudents = () => dispatch => {
-  axios.get('api/students')
+  axios.get('/api/students')
     .then(res => dispatch(getStudents(res.data)))
     .catch(err => console.error(err));
 };
 export const addStudent = (student) => dispatch => {
-  axios.post('api/students', student)
+  axios.post('/api/students', student)
     .then(res => dispatch(postStudent(res.data)))
     .catch(err => console.error(err));
 };
 export const updateStudent = (id, student) => dispatch => {
-  axios.get('api/students', student)
+  axios.put(`/api/students/${id}`, student)
     .then(res => dispatch(putStudent(res.data)))
     .catch(err => console.error(err));
 };
 export const destroyStudent = (id) => dispatch => {
   dispatch(deleteStudent(id));
-  axios.delete(`api/students/${id}`)
+  axios.delete(`/api/students/${id}`)
     .catch(err => console.error(err));
 };

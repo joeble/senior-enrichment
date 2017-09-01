@@ -4,28 +4,28 @@ import axios from 'axios';
 const GET_CAMPUS = 'GET_CAMPUS_BY_ID';
 
 // ACTION CREATOR
-export const getCampus = function (id) {
+export const getCampus = function (campus) {
   return {
     type: GET_CAMPUS,
-    id
+    campus
   }
 }
 
 // REDUCER
-export default function campusReducer (currentCampus = {}, action) {
+export default function campusReducer (state = {}, action) {
   switch (action.type) {
 
     case GET_CAMPUS:
       return action.campus
 
     default:
-      return currentCampus;
+      return state;
   }
 }
 
 // THUNK
 export const fetchCampus = (id) => dispatch => {
-  axios.get(`api/campuses/${id}`)
+  axios.get(`/api/campuses/${id}`)
     .then(res => dispatch(getCampus(res.data)))
     .catch(err => console.error(err));
 };

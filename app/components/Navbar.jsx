@@ -5,14 +5,14 @@ export default function Navbar () {
 
   //adding a NavLink or Link causes the whole page to stop rendering
   return (
-    <div>
-      <h1>Welcome to Universe University!</h1>
+    <div className="Header">
+      <h1 className="myBoi">Welcome to Universe University!</h1>
       <ul>
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink className="NavLink" to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink to="/students">Students</NavLink>
+          <NavLink className="NavLink" to="/students">Students</NavLink>
         </li>
       </ul>
     </div>

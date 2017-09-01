@@ -1,25 +1,24 @@
 import React, {Component} from 'react';
-import store, {fetchCampuses, addStudent} from '../store';
+import store, {currentStudent, fetchStudent, fetchCampuses, updateStudent} from '../store';
+import {Link} from 'react-router-dom';
 import history from '../history';
 
-export default class AddStudent extends Component {
+export default class CampusView extends Component {
 
   constructor(props) {
     super(props);
     this.state = store.getState();
-    this.state.student.campusId = 1;
-
+    // slices the /students/ off of the pathname
+    this.id = parseInt(this.props.location.pathname.slice(10), 10);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleCampusChange = this.handleCampusChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
 
-  componentWillMount() {
-    this.setState({campus: {campusId: 1}})
   }
 
   componentDidMount() {
+    store.dispatch(fetchStudent(this.id));
     store.dispatch(fetchCampuses());
     this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
   }
@@ -29,18 +28,18 @@ export default class AddStudent extends Component {
   }
 
   handleNameChange (event) {
-    this.setState({ student: { name: event.target.value }, error: false});
-    console.log(this.state.student.name, this.state.error);
+    this.setState({ currentStudent: { name: event.target.value }, error: false});
+    console.log(this.state.currentStudent.name, this.state.error);
   }
 
   handleEmailChange (event) {
-    this.setState({ student: { email: event.target.value }, error: false});
-    console.log(this.state.student.email, this.state.error);
+    this.setState({ currentStudent: { email: event.target.value }, error: false});
+    console.log(this.state.currentStudent.email, this.state.error);
   }
 
   handleCampusChange (event) {
-    this.setState({ student: { campusId: event.target.value }, error: false});
-    console.log(this.state.student.campusId, this.state.error);
+    this.setState({ currentStudent: { campusId: event.target.value }, error: false});
+    console.log(this.state.currentStudent.campusId, this.state.error);
   }
 
   handleSubmit (event) {
@@ -58,31 +57,34 @@ export default class AddStudent extends Component {
         email,
         campusId
       }
-      store.dispatch(addStudent(student))
+      store.dispatch(updateStudent(this.id, student));
       history.push('/');
     } else {
       this.setState({error: true});
     }
   }
 
-  render() {
+  render (){
+    const student = this.state.student;
     const campuses = this.state.campuses;
     const error = this.state.error;
     return (
       <div>
-        { !error && <p>This here adds a student.</p> }
+        <p>This is the student page for  {student.name}.</p>
+        <p>Go ahead and email: <Link to="#">{student.email}</Link></p>
+        { !error && <p>Update this student.</p> }
         { error && <p> YOU NO TYPE GOOD!!!!!!!!</p> }
         <form onSubmit={this.handleSubmit}>
           <div>
             <label>
               Name:
-              <input type="text" name="name" value={this.state.name} onChange={this.handleNameChange} />
+              <input type="text" name="name" value={this.state.currentStudent.name} onChange={this.handleNameChange} />
             </label>
           </div>
           <div>
           <label>
             Email:
-            <input type="email" name="email" value={this.state.email} onChange={this.handleEmailChange} />
+            <input type="email" name="email" value={this.state.currentStudent.email} onChange={this.handleEmailChange} />
           </label>
         </div>
         <div>

@@ -1,9 +1,11 @@
 import React from 'react';
+import CampusList from './campus/list';
 
 export default function Home () {
   return (
-    <div>
-      <p>This is the home page.</p>
+    <div className="Content">
+      <p>Home to a Galaxy of Education!</p>
+      <CampusList />
     </div>
   )
 }

@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 
 const Root = ({children}) => {
   return (
-    <div>
+    <div className="wrapper">
       <Navbar />
       { children }
     </div>

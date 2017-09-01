@@ -9,7 +9,8 @@ const Student = db.define('student', {
   },
   email: {
     type: Sequelize.STRING
-  }
+  },
+  campusId: Sequelize.INTEGER
 })
 
 module.exports = Student;

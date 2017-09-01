@@ -28,9 +28,10 @@ router.post('/', function (req, res, next) {
 // PUT
 // - updated student info for one student
 router.put('/:studentId', function (req, res, next) {
+  console.log(`REQBODY:`, req.body);
   Student.findById(req.params.studentId)
     .then(student => student.update(req.body))
-    .then(updatedStudent => res.send(updatedStudent))
+    .then(updatedStudent => res.json(updatedStudent))
     .catch(next);
 });
 

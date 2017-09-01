@@ -1,4 +1,3 @@
-
 import createHistory from 'history/createBrowserHistory';
 
 // Router requires a history prop
